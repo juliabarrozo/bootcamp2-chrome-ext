@@ -1,10 +1,16 @@
-# 🍅 Focus Timer - Extensão Chrome
-
-Uma extensão de timer Pomodoro para Chrome que ajuda a aumentar a produtividade nos estudos e trabalho, desenvolvida com Manifest V3.
+# 🍅 Focus Timer - PWA
 
 ## 📋 Sobre o Projeto
 
-Este projeto foi desenvolvido como parte do Bootcamp II, implementando uma extensão Chrome funcional que utiliza a técnica Pomodoro para gerenciamento de tempo e foco.
+Este projeto foi desenvolvido como parte do Bootcamp II - Entrega Final. Ele implementa uma nova versão PWA da extensão chrome Timer Pomodoro, feita com o objetivo de ajudar a aumentar a produtividade nos estudos e trabalho. Nessa versão uma vez que o usuário completa o timing de estudos é capturado um Pokemon, a fim de motivar a continuidade dos estudos. Além disso, é possível visualizar o histórico de pokemons capturados pelo usuário. 
+
+## Integrantes
+
+- Rillary Lorranne de Souza Portilho
+- Júlia Barrozo Rodrigues Pereira
+- Maria Eduarda de Sousa Sales
+- João Victor Alves Rodrigues
+- Luis Filipe Campelo Aragão
 
 ## ⚡ Funcionalidades
 
@@ -13,6 +19,8 @@ Este projeto foi desenvolvido como parte do Bootcamp II, implementando uma exten
 - ▶️ Controles de iniciar, pausar e resetar
 - 🔄 Contagem regressiva visual em tempo real
 - 🎯 Indicação visual do modo atual (foco/pausa)
+- 🎮 Exibição de pokemon ao finalizar sessão
+- 📋 Listagem de pokemons capturadas
 
 ### Interface Intuitiva
 - 🎨 Design moderno com gradientes e glassmorphism
@@ -20,47 +28,56 @@ Este projeto foi desenvolvido como parte do Bootcamp II, implementando uma exten
 - 🎮 Botões com estados visuais claros
 - ⚙️ Configurações de tempo personalizáveis
 
-### Recursos Avançados
-- 🔔 Notificações do sistema ao completar sessões
-- 📊 Estatísticas de sessões diárias e totais
-- 🔢 Badge no ícone mostrando tempo restante
-- 🌐 Indicador flutuante em páginas web durante sessões
-- 💾 Persistência de dados e configurações
-
 ## 🛠️ Tecnologias Utilizadas
 
-- **Manifest V3** - Versão mais recente da API de extensões Chrome
-- **HTML/CSS/JavaScript** - Frontend vanilla sem dependências
-- **Chrome Extension APIs:**
-  - `chrome.storage` - Armazenamento local
-  - `chrome.alarms` - Alarmes para timer
-  - `chrome.notifications` - Notificações do sistema
-  - `chrome.action` - Badge e popup
-  - `chrome.runtime` - Comunicação entre scripts
+- **Frontend (PWA)**:
+  - React.js
+  - HTML, CSS, JavaScript
+- **Backend (API)**:
+  - Node.js
+  - Express
+  - Axios
+  - CORS
+- **API Externa**:
+  - [PokéAPI](https://pokeapi.co/)
+- **Progressive Web App**:
+  - Manifest PWA
+  - Service Worker (Vite + React)
+- **Extensão Chrome**:
+  - Manifest V3
+  - Content script
+  - Popup HTML
 
-## 📁 Estrutura do Projeto
+## 📁 Estrutura principal do Projeto
 
 ```
-bootcamp2-chrome-ext-rillary08/
-├── manifest.json              # Configuração da extensão
-├── src/
-│   ├── popup/                 # Interface principal
-│   │   ├── popup.html         # Estrutura HTML
-│   │   ├── popup.css          # Estilos modernos
-│   │   └── popup.js           # Lógica do timer
-│   ├── background/            # Script em segundo plano
-│   │   └── service-worker.js  # Gerencia alarms e notificações
-│   └── content/               # Script para páginas web
-│       └── content.js         # Indicador flutuante
-├── icons/                     # Ícones da extensão
-│   ├── icon16.png
-│   ├── icon32.png
-│   ├── icon48.png
-│   └── icon128.png
-├── docs/                      # GitHub Pages
-│   └── index.html             # Página de demonstração
-├── README.md                  # Esta documentação
-└── LICENSE                    # Licença MIT
+focus-timer/
+│
+│  ├─ api/
+│  ├─ src/
+│  │  ├─ index.js           # Todas as rotas e lógica de captura
+│
+├─ web/                     # PWA React
+│  ├─ src/
+│  │  ├─ App.jsx
+│  │  ├─ index.jsx
+│  │  └─ assets/
+│  ├─ index.css
+│  └─ package.json
+│
+├─ extension/               # Extensão Chrome (opcional)
+│  ├─ src/
+│  │  ├─ popup/
+│  │  │  ├─ popup.html
+│  │  │  ├─ popup.js
+│  │  │  └─ popup.css
+│  │  ├─ content/
+│  │  │  └─ content.js
+│  │  └─ background/
+│  │     └─ service-worker.js
+│  └─ manifest.json
+│
+└─ README.md
 ```
 
 ## 🚀 Instalação
@@ -105,22 +122,6 @@ Alternativamente, baixe o arquivo .zip da [página de releases](https://github.c
 - **Trabalho (min)** - Duração das sessões de foco (1-60 min)
 - **Pausa (min)** - Duração das pausas (1-30 min)
 
-## 🎯 Recursos Especiais
-
-### Badge Inteligente
-O ícone da extensão mostra o tempo restante em minutos, com cores diferentes para trabalho (vermelho) e pausa (azul).
-
-### Indicador de Página
-Durante sessões ativas, aparece um indicador discreto no canto das páginas web visitadas, lembrando que você está focando.
-
-### Estatísticas
-Acompanhe seu progresso com contadores de:
-- Sessões completadas hoje
-- Total de sessões completadas
-
-### Persistência
-Todas as configurações e estatísticas são salvas automaticamente e sincronizadas entre abas.
-
 ## 🔧 Desenvolvimento
 
 ### Pré-requisitos
@@ -129,48 +130,37 @@ Todas as configurações e estatísticas são salvas automaticamente e sincroniz
 - Git para controle de versão
 
 ### Executar em Desenvolvimento
-1. Clone o repositório
-2. Abra a pasta no VS Code
-3. Carregue a extensão no Chrome (modo desenvolvedor)
-4. Faça alterações nos arquivos
-5. Recarregue a extensão em `chrome://extensions`
+## 🚀 Como Usar
 
-### Estrutura de Desenvolvimento
-- **popup/** - Interface e lógica principal
-- **background/** - Service worker para funcionalidades em segundo plano
-- **content/** - Scripts injetados em páginas web
-- **manifest.json** - Configuração e permissões da extensão
+### 1. Clonar o projeto
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd focus-timer-pwa
 
-## 🐛 Resolução de Problemas
+### 1. Clonar o projeto
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd boorcap2-chrome-ext
 
-### Extensão não carrega
-- Verifique se o modo desenvolvedor está ativo
-- Confirme que todos os arquivos estão na estrutura correta
-- Veja erros no console em `chrome://extensions`
+### 2. Rodar a API
+cd apps/api
+npm install
+npm run dev
 
-### Timer não conta visualmente
-- Recarregue a extensão completamente
-- Abra as ferramentas de desenvolvedor (F12) para ver logs
-- Verifique se há erros JavaScript no console
+- A API rodará em: http://localhost:3001/:
+- POST/capture
+- GET/capture
 
-### Notificações não aparecem
-- Permita notificações para o Chrome nas configurações do sistema
-- Verifique se a extensão tem permissões de notificação
+### 3. Rodar a web
+cd web
+npm install
+npm run dev
+
+- A API rodará em: http://localhost:5173/.
 
 ## 📄 Licença
 
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
-
-## 👨‍💻 Desenvolvimento
-
-Desenvolvido por **rillary08** como projeto do Bootcamp II.
-
-### Tecnologias Aprendidas
-- Desenvolvimento de extensões Chrome
-- Manifest V3 e suas APIs
-- JavaScript moderno (async/await, modules)
-- CSS avançado (gradientes, backdrop-filter)
-- Git e GitHub para versionamento
 
 ---
 

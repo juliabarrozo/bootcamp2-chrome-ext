@@ -1,0 +1,22 @@
+{
+  "name": "focus-timer-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Backend API para o Focus Timer com gamificação Pokémon",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "build": "echo \"Build não necessário (Node com ES modules/commonjs)\""
+  },
+  "author": "Julia",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

@@ -1,4 +1,8 @@
 services:
+  api:
+    build: ./apps/api
+    ports:
+      - "3001:3001"
   e2e:
     build: .
     image: focus-timer-e2e:latest
@@ -11,7 +15,7 @@ services:
       - /app/node_modules
     working_dir: /app
     command: npm run test:e2e
-    shm_size: 2gb  # Necessário para o Chromium não falhar por falta de memória compartilhada
+    shm_size: 2gb  
     networks:
       - test-network
 
