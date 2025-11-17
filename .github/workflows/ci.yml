@@ -40,14 +40,13 @@ jobs:
       - name: 🎭 Instalar Playwright Chromium
         run: npx playwright install --with-deps chromium
       
-      - name: 🚀 Start API
-        run: |
-          cd apps/api
-          npm run dev &
-          sleep 10
-          
-      - name: 🧪 Executar testes E2E
-        run: npm run test:e2e
+      - name: 🚀 Start API e rodar testes
+        uses: cypress-io/start-server-and-test@v1.15.0
+        with:
+          server: 'npm run start:api'
+          url: 'http://localhost:3001'
+          testCommand: 'npm run test:e2e'
+
 
       - name: 📊 Upload relatório Playwright (se falhar)
         if: failure()

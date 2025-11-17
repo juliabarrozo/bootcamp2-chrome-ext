@@ -13,13 +13,13 @@
     "build:api": "cd apps/api && npm run build",
     "start:web": "cd apps/web && npm run dev",
     "start:api": "cd apps/api && npm run dev",
-    "test:e2e":  "npx playwright test apps/tests"
-
+    "test:e2e": "npx playwright test apps/tests"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "playwright": "^1.56.1"
   }
 }
