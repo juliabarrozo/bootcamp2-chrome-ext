@@ -22,7 +22,7 @@ jobs:
       - name: 📥 Checkout código
         uses: actions/checkout@v4
 
-      - name: 🟢 Setup Node.js ${{ matrix.node-version }}
+      - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -39,14 +39,15 @@ jobs:
 
       - name: 🎭 Instalar Playwright Chromium
         run: npx playwright install --with-deps chromium
-      
-      - name: 🚀 Start API e rodar testes
-        uses: cypress-io/start-server-and-test@v1
-        with:
-          server: 'npm run start:api'
-          url: 'http://localhost:3001'
-          testCommand: 'npm run test:e2e'
 
+      - name: 🚀 Start API em background
+        run: |
+          npm run start:api &        # roda a API em background
+          echo "Esperando API iniciar..."
+          sleep 10                   # espera 10 segundos para API estar pronta
+
+      - name: 🧪 Executar testes E2E
+        run: npm run test:e2e
 
       - name: 📊 Upload relatório Playwright (se falhar)
         if: failure()
