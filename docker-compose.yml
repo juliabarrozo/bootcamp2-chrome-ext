@@ -1,24 +1,29 @@
 services:
+  web:
+    build: .
+    ports:
+      - "5173:5173"
+    command: npm run start:web
+
   api:
-    build: ./apps/api
+    build: .
     ports:
       - "3001:3001"
-  e2e:
+    command: npm run start:api
+
+  extension:
     build: .
-    image: focus-timer-e2e:latest
-    container_name: focus-timer-tests
-    environment:
-      - CI=true
-      - NODE_ENV=test
+    ports:
+      - "3000:3000"
+    command: npm run start:extension
+
+  tests:
+    build: .
+    working_dir: /app/apps/tests
     volumes:
       - ./:/app
       - /app/node_modules
-    working_dir: /app
+    environment:
+      - CI=true
+      - NODE_ENV=test
     command: npm run test:e2e
-    shm_size: 2gb  
-    networks:
-      - test-network
-
-networks:
-  test-network:
-    driver: bridge
