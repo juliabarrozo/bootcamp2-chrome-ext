@@ -1,0 +1,29 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5173:5173"
+    command: npm run start:web
+
+  api:
+    build: .
+    ports:
+      - "3001:3001"
+    command: npm run start:api
+
+  extension:
+    build: .
+    ports:
+      - "3000:3000"
+    command: npm run start:extension
+
+  tests:
+    build: .
+    working_dir: /app/apps/tests
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - CI=true
+      - NODE_ENV=test
+    command: npm run test:e2e

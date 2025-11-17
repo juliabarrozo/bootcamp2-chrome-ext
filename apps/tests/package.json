@@ -1,0 +1,12 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.spec.js",
+  "scripts": {
+  "test:e2e": "playwright test"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
