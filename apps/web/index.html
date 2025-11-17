@@ -2,16 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- Manifest do PWA -->
     <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="icon" type="image/svg+xml" href="./public/icons/icon48.png" />
+
+    <!-- Ícones -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/icons/icon48.png" />
+    <link rel="apple-touch-icon" href="/icons/icon192.png" />
+
+    <!-- Cor da barra do navegador / status bar -->
     <meta name="theme-color" content="#ef5350" />
 
-
+    <!-- Responsivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Focus Timer PWA</title>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Script principal do app -->
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Registro do Service Worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js")
+            .then(reg => console.log("Service Worker registrado:", reg.scope))
+            .catch(err => console.error("Falha ao registrar Service Worker:", err));
+        });
+      }
+    </script>
   </body>
 </html>
