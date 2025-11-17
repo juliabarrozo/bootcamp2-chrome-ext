@@ -9,46 +9,40 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:  # Permite executar manualmente
+  workflow_dispatch:
 
 jobs:
   test-and-build:
     runs-on: ubuntu-latest
-    
     strategy:
       matrix:
         node-version: [20.x]
-    
+
     steps:
       - name: 📥 Checkout código
         uses: actions/checkout@v4
-      
+
       - name: 🟢 Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      
+
       - name: 📦 Instalar dependências
-        run: npm ci
-      
+        run: npm install
+
       - name: 🔨 Build web
-        run: npm run build --workspace=web
+        run: npm run build:web
 
       - name: 🔨 Build API
-        run: npm run build --workspace=api
-
-      - name: 🧪 Testes E2E
-        run: npm run test:e2e --workspace=tests
+        run: npm run build:api
 
       - name: 🎭 Instalar Playwright Chromium
         run: npx playwright install --with-deps chromium
-      
-      - name: 🧪 Executar testes E2E
-        working-directory: ./apps/tests
-        run: npm ci && npm run test:e2e
 
-      
+      - name: 🧪 Executar testes E2E
+        run: npm run test:e2e
+
       - name: 📊 Upload relatório Playwright (se falhar)
         if: failure()
         uses: actions/upload-artifact@v4
@@ -56,14 +50,14 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-      
+
       - name: 📦 Upload extensão empacotada
         uses: actions/upload-artifact@v4
         with:
           name: focus-timer-extension
           path: dist/extension.zip
           retention-days: 90
-      
+
       - name: 📊 Upload relatório Playwright (sucesso)
         if: success()
         uses: actions/upload-artifact@v4
@@ -71,7 +65,7 @@ jobs:
           name: playwright-report-success
           path: playwright-report/
           retention-days: 7
-      
+
       - name: ✅ Resumo dos testes
         if: always()
         run: |
@@ -79,54 +73,3 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "✅ Build concluído com sucesso!" >> $GITHUB_STEP_SUMMARY
           echo "📦 Extensão empacotada em: \`dist/extension.zip\`" >> $GITHUB_STEP_SUMMARY
-          
-  create-release:
-    needs: test-and-build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
-    steps:
-      - name: 📥 Checkout código
-        uses: actions/checkout@v4
-      
-      - name: 📥 Download artefato
-        uses: actions/download-artifact@v4
-        with:
-          name: focus-timer-extension
-          path: ./artifacts
-      
-      - name: 📋 Criar tag de versão
-        id: version
-        run: |
-          VERSION=$(date +'%Y.%m.%d-%H%M')
-          echo "version=v${VERSION}" >> $GITHUB_OUTPUT
-          echo "📌 Versão: v${VERSION}"
-      
-      - name: 🚀 Criar Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ steps.version.outputs.version }}
-          name: Focus Timer ${{ steps.version.outputs.version }}
-          body: |
-            ## 🍅 Focus Timer Extension
-            
-            ### 📦 Instalação
-            1. Baixe o arquivo `extension.zip`
-            2. Extraia em uma pasta
-            3. Vá em `chrome://extensions`
-            4. Ative "Modo desenvolvedor"
-            5. Clique em "Carregar sem compactação"
-            
-            ### ✨ Funcionalidades
-            - ⏰ Timer Pomodoro configurável
-            - 🔔 Notificações ao completar
-            - 📊 Estatísticas de sessões
-            - 🎨 Interface moderna
-            
-            ---
-            **Build automático via GitHub Actions**
-          files: ./artifacts/extension.zip
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

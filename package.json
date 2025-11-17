@@ -6,7 +6,7 @@
     "apps/web",
     "apps/extension",
     "apps/tests"
-  ],  
+  ],
   "scripts": {
     "build": "echo 'build root'",
     "build:web": "cd apps/web && npm run build",

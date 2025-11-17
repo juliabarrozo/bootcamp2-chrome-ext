@@ -1,0 +1,97 @@
+/* Container principal do timer */
+.container {
+  width: 350px;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* Header */
+.header h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.header p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Timer display */
+.timer-display {
+  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.time {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: monospace;
+}
+
+.status {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Botões */
+.controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Settings */
+.settings {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.settings label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.settings input {
+  width: 60px;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  font-weight: bold;
+}
+
+/* Histórico de Pokémon */
+#pokemon-history {
+  margin-top: 20px;
+}
+
+#pokemon-history div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
