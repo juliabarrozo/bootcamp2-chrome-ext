@@ -39,7 +39,9 @@ jobs:
         run: npm run build
       
       - name: 🧪 Executar testes E2E
-        run: npm run test:e2e
+        working-directory: ./apps/tests
+        run: npm ci && npm run test:e2e
+
       
       - name: 📊 Upload relatório Playwright (se falhar)
         if: failure()
