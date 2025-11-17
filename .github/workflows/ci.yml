@@ -41,7 +41,7 @@ jobs:
         run: npx playwright install --with-deps chromium
       
       - name: 🚀 Start API e rodar testes
-        uses: cypress-io/start-server-and-test@v1.15.0
+        uses: cypress-io/start-server-and-test@v1
         with:
           server: 'npm run start:api'
           url: 'http://localhost:3001'
