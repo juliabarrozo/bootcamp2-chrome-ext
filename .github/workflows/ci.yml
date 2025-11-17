@@ -32,11 +32,17 @@ jobs:
       - name: 📦 Instalar dependências
         run: npm ci
       
+      - name: 🔨 Build web
+        run: npm run build --workspace=web
+
+      - name: 🔨 Build API
+        run: npm run build --workspace=api
+
+      - name: 🧪 Testes E2E
+        run: npm run test:e2e --workspace=tests
+
       - name: 🎭 Instalar Playwright Chromium
         run: npx playwright install --with-deps chromium
-      
-      - name: 🔨 Build da extensão
-        run: npm run build
       
       - name: 🧪 Executar testes E2E
         working-directory: ./apps/tests
