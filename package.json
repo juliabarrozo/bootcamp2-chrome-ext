@@ -13,7 +13,7 @@
     "build:api": "cd apps/api && npm run build",
     "start:web": "cd apps/web && npm run dev",
     "start:api": "cd apps/api && npm run dev",
-    "test:e2e": "cd apps/tests && npm run test:e2e"
+    "test:e2e": "cd apps/tests && npm test"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1"
