@@ -3,13 +3,13 @@ services:
     build: .
     ports:
       - "5173:5173"
-    command: npm run start:web
+    command: npm run dev --workspace=web
 
   api:
     build: .
     ports:
       - "3001:3001"
-    command: npm run start:api
+    command: npm run dev --workspace=api
 
   extension:
     build: .

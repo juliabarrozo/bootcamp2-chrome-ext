@@ -1,0 +1,9 @@
+{
+  "name": "extension",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'build da extensão'",
+    "dev": "echo 'dev da extensão'"
+  },
+  "dependencies": {}
+}
