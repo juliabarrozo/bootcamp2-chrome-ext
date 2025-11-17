@@ -6,14 +6,14 @@
     "apps/web",
     "apps/extension",
     "apps/tests"
-  ],  
+  ],
   "scripts": {
-    "build": "echo 'build root'",
-    "build:web": "cd apps/web && npm run build",
-    "build:api": "cd apps/api && npm run build",
-    "start:web": "cd apps/web && npm run dev",
-    "start:api": "cd apps/api && npm run dev",
-    "test:e2e": "cd apps/tests && npm run test:e2e"
+    "build": "echo 'Build root'",
+    "build:web": "npm --workspace=apps/web run build",
+    "build:api": "npm --workspace=apps/api run build",
+    "start:web": "npm --workspace=apps/web run dev",
+    "start:api": "npm --workspace=apps/api run dev",
+    "test:e2e": "npm --workspace=apps/tests run test:e2e"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1"

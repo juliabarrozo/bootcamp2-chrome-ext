@@ -1,12 +1,10 @@
 {
   "name": "tests",
-  "version": "1.0.0",
-  "description": "",
-  "main": "api.spec.js",
+  "private": true,
   "scripts": {
-  "test:e2e": "playwright test"
-},
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
 }
